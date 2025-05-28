@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: ElasticDataLoader
+  # elasticsearch:
+  #   uris: https://localhost:9200/elastic
+  #   password: rzppzzNiOy6+jy8YOlnj
+  # elasticsearch:
+  #   host: localhost
+  #   port: 9200
+  #   username: elastic
+  #   password: rzppzzNiOy6+jy8YOlnj
+  #   ca-cert-path: C:\elasticsearch-9.0.1-windows-x86_64\elasticsearch-9.0.1\config\certs
+  #   jpa:
+  #     show-sql: true
+  #     hibernate:
+  #       ddl-auto: none
+
+mysql:
+  datasource:
+    jdbc-url: jdbc:mysql://localhost:3306/bank_details
+    username: root
+    password: MySqlRoot28!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    pool-name: HikariPool-MySQL
+    maximum-pool-size: 10
+    type: com.zaxxer.hikari.HikariDataSource
+
+oracle:
+  datasource:
+    jdbc-url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
+    username: system
+    password: OracleSystem28
+    driver-class-name: oracle.jdbc.OracleDriver
+    pool-name: HikariPool-Oracle
+    maximum-pool-size: 10
+    type: com.zaxxer.hikari.HikariDataSource
+ 
