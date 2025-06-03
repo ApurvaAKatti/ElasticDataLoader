@@ -3,6 +3,7 @@ package com.example.elastic.data.loader.oracle.entities;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -74,4 +75,10 @@ public class ClientsAssetsLiabilities {
 
     @Column(name = "net_worth")
     private BigDecimal netWorth;
+
+    @Column(name = "last_updated")
+    private Timestamp lastUpdated;
+
+    @Column(name = "sync_state")
+    private String syncState;
 }

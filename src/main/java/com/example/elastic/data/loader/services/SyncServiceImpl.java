@@ -58,6 +58,39 @@ public class SyncServiceImpl implements SyncService {
         }
     }
 
+    @Override
+    public void syncAllClients() {
+        try {
+            List<ClientDetails> clientDetailsList = clientDetailsRepository.findAll();
+            List<ClientsAssetsLiabilities> assetsLiabilitiesList = clientsAssetsLiabilitiesRepository.findAll();
+
+            Map<Integer, ClientFullProfile> mergedData = new HashMap<>();
+
+            for (ClientDetails clientDetails : clientDetailsList) {
+                ClientsAssetsLiabilities assetsLiabilities = assetsLiabilitiesList.stream()
+                        .filter(al -> al.getClientId().equals(clientDetails.getClientId()))
+                        .findFirst()
+                        .orElse(new ClientsAssetsLiabilities());
+
+                ClientFullProfile profile = merge(clientDetails, assetsLiabilities);
+                mergedData.put(clientDetails.getClientId(), profile);
+            }
+
+            for (Map.Entry<Integer, ClientFullProfile> entry : mergedData.entrySet()) {
+                elasticsearchClient.index(i -> i
+                        .index("client-data")
+                        .id(String.valueOf(entry.getKey()))
+                        .document(entry.getValue()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to sync all clients data to Elasticsearch", e);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Unexpected error during sync of all clients", e);
+        }
+    }
+
     private ClientFullProfile merge(ClientDetails clientDetails, ClientsAssetsLiabilities assetsLiabilities) {
         ClientFullProfile profile = new ClientFullProfile();
         BeanUtils.copyProperties(clientDetails, profile);

@@ -4,6 +4,8 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -76,20 +78,12 @@ public class ClientDetails {
     @Column(name = "income")
     private BigDecimal income;
 
-    // @Enumerated(EnumType.STRING)
     @Column(name = "relationship_status")
     private String relationshipStatus;
 
-    // // Enums
-    // public enum Gender {
-    //     MALE, FEMALE, OTHER
-    // }
+    @Column(name = "last_updated")
+    private Timestamp lastUpdated;
 
-    // public enum AccountType {
-    //     SAVINGS, CURRENT, FIXED DEPOSIT
-    // }
-
-    // public enum RelationshipStatus {
-    //     NEW, REGULAR, VIP
-    // }
+    @Column(name = "sync_state")
+    private String syncState;
 }

@@ -1,19 +1,11 @@
 spring:
   application:
     name: ElasticDataLoader
-  # elasticsearch:
-  #   uris: https://localhost:9200/elastic
-  #   password: rzppzzNiOy6+jy8YOlnj
-  # elasticsearch:
-  #   host: localhost
-  #   port: 9200
-  #   username: elastic
-  #   password: rzppzzNiOy6+jy8YOlnj
-  #   ca-cert-path: C:\elasticsearch-9.0.1-windows-x86_64\elasticsearch-9.0.1\config\certs
-  #   jpa:
-  #     show-sql: true
-  #     hibernate:
-  #       ddl-auto: none
+
+# logging:
+#   level:
+#     org.hibernate.SQL: DEBUG
+#     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
 mysql:
   datasource:
